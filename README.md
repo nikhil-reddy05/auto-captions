@@ -134,19 +134,5 @@ auto-captions/
 
 ## 📜 License
 
-MIT — see [LICENSE] (https://github.com/nikhil-reddy05/auto-captions/blob/main/LICENSE)
-
----
-
-## 🙏 Acknowledgements
-
-- [OpenAI Whisper](https://github.com/openai/whisper) for transcription  
-- [FFmpeg](https://ffmpeg.org/) for burning captions  
-- ASS/SSA subtitle format for flexible styling
-
-
-
-
-
-
+MIT — see [LICENSE](https://github.com/nikhil-reddy05/auto-captions/blob/main/LICENSE)
 
