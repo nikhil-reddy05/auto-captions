@@ -43,7 +43,8 @@ def transcribe_audio_to_segments(
 
 def build_word_timestamps(
     captions_data: Dict[str, Any],
-    lowercase: bool = True
+    lowercase: bool = True,
+    init_start: float = 0.0
 ) -> List[Dict[str, Any]]:
     """
     Flatten Whisper segments into:
@@ -60,6 +61,9 @@ def build_word_timestamps(
                 "start": float(word_data.get("start", 0.0)),
                 "end": float(word_data.get("end", 0.0))
             })
+    # Only bump the very first word’s start to init_start
+    if word_timestamps and word_timestamps[0]["start"] < init_start:
+        word_timestamps[0]["start"] = init_start
 
     return word_timestamps
 
@@ -77,7 +81,8 @@ def prepare_json_words_with_timestamps(
     output_json_path: str = "temp/word_timestamps.json",
     model_name: str = "small",
     language: Optional[str] = None,
-    lowercase: bool = True
+    lowercase: bool = True,
+    init_start_ts: float = 0.0
 ) -> None:
     """
     1) Extract audio from the video
@@ -93,7 +98,7 @@ def prepare_json_words_with_timestamps(
         return
 
     captions_data = transcribe_audio_to_segments(audio_path, model_name=model_name, language=language)
-    word_timestamps = build_word_timestamps(captions_data, lowercase=lowercase)
+    word_timestamps = build_word_timestamps(captions_data, lowercase=lowercase, init_start=init_start_ts)
     save_word_timestamps_json(word_timestamps, output_json_path)
 
     print(f"Extracted captions saved to {output_json_path}")
@@ -107,6 +112,7 @@ def parse_args() -> argparse.Namespace:
     p.add_argument("-m", "--model", default="small", help="Whisper model size (tiny/base/small/medium/large...).")
     p.add_argument("-l", "--language", default="en", help="Language code (e.g., en). Omit to auto-detect.")
     p.add_argument("--no-lowercase", action="store_true", help="Keep original word casing (default lowercases).")
+    p.add_argument("-s", "--init-start", default=0.0, help="Set initial start time, 0.0 otherwise")
     return p.parse_args()
 
 
@@ -120,6 +126,7 @@ def main() -> int:
             model_name=args.model,
             language=args.language,
             lowercase=not args.no_lowercase,
+            init_start_ts=args.init_start
         )
         return 0
     except KeyboardInterrupt:
