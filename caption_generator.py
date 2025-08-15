@@ -4,9 +4,9 @@ Extract audio from a video, transcribe with Whisper (per-word), and write
 temp/word_timestamps.json in your original schema.
 
 Usage examples:
-  python captions_prep.py
-  python captions_prep.py -i myvideo.mp4 -o temp/word_timestamps.json
-  python captions_prep.py -i input.mp4 -a tmp/audio.wav -o tmp/words.json -m small -l en --no-lowercase
+  python caption_generator.py
+  python caption_generator.py -i myvideo.mp4 -o temp/word_timestamps.json
+  python caption_generator.py -i input.mp4 -a tmp/audio.wav -o tmp/words.json -m small -l en --no-lowercase
 """
 
 from pathlib import Path
