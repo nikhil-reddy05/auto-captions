@@ -10,7 +10,6 @@ Generate clean, stylized **burned-in captions** for your videos using:
 - **Stylable captions**: control font, size, outline, margins, pop effect, shadows
 - **Burn-in ready**: simple FFmpeg command to embed captions
 
----
 
 ## 🧰 Requirements
 - **Python** 3.9+ (3.10/3.11 recommended)
@@ -20,7 +19,6 @@ Generate clean, stylized **burned-in captions** for your videos using:
   - Windows: Download FFmpeg builds and add `bin` to PATH
 - Python packages from `requirements.txt`
 
----
 
 ## 📦 Installation
 ```bash
@@ -37,7 +35,6 @@ source .venv/bin/activate
 pip install -r requirements.txt
 ```
 
----
 
 ## 🚀 Usage
 
@@ -63,7 +60,6 @@ The JSON is a flat list like:
 ]
 ```
 
----
 
 ### 2) Create the ASS subtitle file
 
@@ -84,7 +80,6 @@ List all options:
 python json_to_ass.py -h
 ```
 
----
 
 ### 3) Burn captions into the video (FFmpeg)
 
@@ -98,7 +93,6 @@ If your chosen font doesn’t render, point FFmpeg to a fonts folder:
 ffmpeg -y -i input_video.mp4   -vf "ass=captions.ass:fontsdir=./fonts:shaping=harfbuzz"   -c:v libx264 -crf 18 -preset medium -c:a copy output_with_captions.mp4
 ```
 
----
 
 ## 📱 Tips for 9:16 / Shorts
 
@@ -107,7 +101,6 @@ ffmpeg -y -i input_video.mp4   -vf "ass=captions.ass:fontsdir=./fonts:shaping=ha
 - For busy backgrounds, use **white text + thick black outline** (`--outline 7–9`).  
 - If speech is very fast, slightly reduce `--fontsize` or increase `--words-per-cap`.
 
----
 
 ## 🧷 Troubleshooting
 
@@ -116,13 +109,11 @@ ffmpeg -y -i input_video.mp4   -vf "ass=captions.ass:fontsdir=./fonts:shaping=ha
 - **Transcription is slow on CPU:** Use a smaller Whisper model in `caption_generator.py` (e.g., `base`/`small`).  
 - **Captions overlap platform UI:** Increase `--margin-v` or nudge the first word’s `start` to `0.01`.
 
----
 
 ## 📜 License
 
 MIT — see [LICENSE](https://github.com/nikhil-reddy05/auto-captions/blob/main/LICENSE)
 
----
 
 ## Inspiration & Acknowledgments
 
