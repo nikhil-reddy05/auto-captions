@@ -122,25 +122,110 @@ def build_ass(words, wpc=3, font="Montserrat", fs=72,
     return "".join(lines)
 
 def main():
-    ap = argparse.ArgumentParser()
-    ap.add_argument("--json", default="temp/word_timestamps.json")
-    ap.add_argument("--out", default="captions.ass")
-    ap.add_argument("--words-per-cap", type=int, default=3)
-    ap.add_argument("--font", default="Montserrat")
-    ap.add_argument("--fontsize", type=int, default=92)
-    ap.add_argument("--outline", type=int, default=7)
-    ap.add_argument("--shadow", type=int, default=0)
-    ap.add_argument("--margin-v", type=int, default=400)
-    ap.add_argument("--margin-lr", type=int, default=70)
-    ap.add_argument("--active", default="#FFB117")
-    ap.add_argument("--inactive", default="#FFFFFF")
-    ap.add_argument("--outline-color", default="#000000")
-    ap.add_argument("--no-uppercase", action="store_true")
-    ap.add_argument("--tail-hold", type=float, default=0.0)
-    ap.add_argument("--pop-in-ms", type=int, default=90)
-    ap.add_argument("--pop-out-ms", type=int, default=180)
-    ap.add_argument("--pop-outline-extra", type=int, default=3)
-    ap.add_argument("--pop-blur", type=float, default=0.8)
+    ap = argparse.ArgumentParser(description="Generate stylized video captions from per-word timestamps JSON.")
+
+    ap.add_argument(
+        "--json",
+        default="temp/word_timestamps.json",
+        help="Path to the JSON file containing per-word timestamps (default: temp/word_timestamps.json)."
+    )
+    ap.add_argument(
+        "--out",
+        default="captions.ass",
+        help="Output subtitle file path (.ass format)."
+    )
+    ap.add_argument(
+        "--words-per-cap",
+        type=int,
+        default=3,
+        help="Number of words to display per caption segment (default: 3)."
+    )
+    ap.add_argument(
+        "--font",
+        default="Montserrat",
+        help="Font family for the captions (default: Montserrat)."
+    )
+    ap.add_argument(
+        "--fontsize",
+        type=int,
+        default=92,
+        help="Font size for the captions (default: 92)."
+    )
+    ap.add_argument(
+        "--outline",
+        type=int,
+        default=7,
+        help="Outline thickness for caption text (default: 7)."
+    )
+    ap.add_argument(
+        "--shadow",
+        type=int,
+        default=0,
+        help="Shadow size for caption text (default: 0)."
+    )
+    ap.add_argument(
+        "--margin-v",
+        type=int,
+        default=400,
+        help="Vertical margin from the bottom of the video (default: 400)."
+    )
+    ap.add_argument(
+        "--margin-lr",
+        type=int,
+        default=70,
+        help="Horizontal margin from the left/right edges (default: 70)."
+    )
+    ap.add_argument(
+        "--active",
+        default="#FFB117",
+        help="Hex color code for active (currently spoken) words (default: #FFB117)."
+    )
+    ap.add_argument(
+        "--inactive",
+        default="#FFFFFF",
+        help="Hex color code for inactive (upcoming) words (default: #FFFFFF)."
+    )
+    ap.add_argument(
+        "--outline-color",
+        default="#000000",
+        help="Hex color code for the caption text outline (default: #000000)."
+    )
+    ap.add_argument(
+        "--no-uppercase",
+        action="store_true",
+        help="Disable automatic conversion of captions to uppercase."
+    )
+    ap.add_argument(
+        "--tail-hold",
+        type=float,
+        default=0.0,
+        help="Extra hold time (in seconds) for the last word of a caption before disappearing (default: 0.0)."
+    )
+    ap.add_argument(
+        "--pop-in-ms",
+        type=int,
+        default=90,
+        help="Animation duration in milliseconds for captions appearing (default: 90)."
+    )
+    ap.add_argument(
+        "--pop-out-ms",
+        type=int,
+        default=180,
+        help="Animation duration in milliseconds for captions disappearing (default: 180)."
+    )
+    ap.add_argument(
+        "--pop-outline-extra",
+        type=int,
+        default=3,
+        help="Extra outline thickness during pop-in animation (default: 3)."
+    )
+    ap.add_argument(
+        "--pop-blur",
+        type=float,
+        default=0.8,
+        help="Blur intensity during pop-in animation (default: 0.8)."
+    )
+
 
     args = ap.parse_args()
     words = json.loads(pathlib.Path(args.json).read_text(encoding="utf-8"))
