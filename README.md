@@ -123,3 +123,12 @@ ffmpeg -y -i input_video.mp4   -vf "ass=captions.ass:fontsdir=./fonts:shaping=ha
 
 MIT — see [LICENSE](https://github.com/nikhil-reddy05/auto-captions/blob/main/LICENSE)
 
+--
+
+## Inspiration & Acknowledgments
+
+This project was inspired by the [Captions repository](https://github.com/it-code-lab/Captions), which provided foundational ideas for stylized caption rendering and subtitle formatting. Our version expands on these concepts by integrating:
+
+- Whisper-based per-word timestamp extraction
+- Dynamic ASS karaoke-style captions with pop-in animations
+- Full customization via CLI arguments (fonts, outlines, animation timings)
