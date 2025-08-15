@@ -4,7 +4,6 @@ Generate clean, stylized **burned-in captions** for your videos using:
 1. Per-word timestamps  
 2. An ASS subtitle file you can burn into the final video with FFmpeg
 
----
 
 ## ✨ Features
 - **Per-word timing**: ideal for “karaoke” style highlights
