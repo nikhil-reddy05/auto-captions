@@ -119,19 +119,6 @@ ffmpeg -y -i input_video.mp4   -vf "ass=captions.ass:fontsdir=./fonts:shaping=ha
 
 ---
 
-## 📁 Project Structure
-
-```
-auto-captions/
-├─ caption_generator.py    # builds temp/word_timestamps.json from input_video.mp4
-├─ json_to_ass.py          # converts JSON → captions.ass with styling
-├─ requirements.txt        # Python dependencies
-├─ LICENSE                 # MIT
-└─ README.md
-```
-
----
-
 ## 📜 License
 
 MIT — see [LICENSE](https://github.com/nikhil-reddy05/auto-captions/blob/main/LICENSE)
