@@ -123,7 +123,7 @@ ffmpeg -y -i input_video.mp4   -vf "ass=captions.ass:fontsdir=./fonts:shaping=ha
 
 MIT — see [LICENSE](https://github.com/nikhil-reddy05/auto-captions/blob/main/LICENSE)
 
---
+---
 
 ## Inspiration & Acknowledgments
 
