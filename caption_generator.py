@@ -112,7 +112,7 @@ def parse_args() -> argparse.Namespace:
     p.add_argument("-m", "--model", default="small", help="Whisper model size (tiny/base/small/medium/large...).")
     p.add_argument("-l", "--language", default="en", help="Language code (e.g., en). Omit to auto-detect.")
     p.add_argument("--no-lowercase", action="store_true", help="Keep original word casing (default lowercases).")
-    p.add_argument("-s", "--init-start", default=0.0, help="Set initial start time, 0.0 otherwise")
+    p.add_argument("-s", "--init-start", type=float, default=0.0, help="Set initial start time, 0.0 otherwise")
     return p.parse_args()
 
 
